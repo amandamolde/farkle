@@ -22,18 +22,26 @@ const rollDice = () => {
 const displayRoll = () => {
 	console.log(roll);
 	for (let i = 0; i < 6; i++) {
-		let die = roll[i];
-		console.log(die);
-		$('.roll').append(`<div class="die">${die}</div>`);
+		let dieValue = roll[i];
+		console.log(dieValue);
+		const die = $(`<div class="die">${dieValue}</div>`);
+		$(die).attr("value", `${dieValue}`);
+		$('.roll').append(die);
+
 	}
 }
 
 const addDieToHand = () => {
-	
+	$('.die').on('click', (e) => {
+		console.log(e.currentTarget);
+		console.log('clicked!')
+		console.log(e.currentTarget.text());
+	})
 }
 
 
 
 rollDice();
 displayRoll();
+addDieToHand();
 
