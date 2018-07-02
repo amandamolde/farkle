@@ -121,18 +121,21 @@ const scoreSixes = () => {
 const scoreFourOfAKind = () => {
 	if (countOfOnes == 4 || countOfTwos == 4 || countOfThrees == 4 || countOfFours == 4 || countOfFives == 4 || countOfSixes == 4) {
 		handScore += 1000;
+		return true;
 	};
 };
 
 const scoreFiveOfAKind = () => {
 	if (countOfOnes == 5 || countOfTwos == 5 || countOfThrees == 5 || countOfFours == 5 || countOfFives == 5 || countOfSixes == 5) {
 		handScore += 2000;
+		return true;
 	};
 };
 
 const scoreSixOfAKind = () => {
 	if (countOfOnes == 6 || countOfTwos == 6 || countOfThrees == 6 || countOfFours == 6 || countOfFives == 6 || countOfSixes == 6) {
 		handScore += 3000;
+		return true;
 	};
 };
 
@@ -147,6 +150,30 @@ const scoreStraight = () => {
 	};
 	if (straight.length == 6) {
 		handScore += 1500;
+		return true;
+	};
+};
+
+const scoreHand = () => {
+	if (scoreStraight()) {
+		scoreStraight();
+	} else if (scoreSixOfAKind()) {
+		scoreSixOfAKind();
+	} else if (scoreFiveOfAKind()) {
+		scoreFiveOfAKind();
+		scoreOnes();
+		scoreFives();
+	} else if (scoreFourOfAKind()) {
+		scoreFourOfAKind();
+		scoreOnes();
+		scoreFives();
+	} else {
+		scoreOnes();
+		scoreTwos();
+		scoreThrees();
+		scoreFours();
+		scoreFives();
+		scoreSixes();
 	};
 };
 
@@ -156,4 +183,4 @@ rollDice();
 displayRoll();
 addOrRemoveDieFromHand();
 countDieInHand();
-scoreOnes();
+scoreHand();
