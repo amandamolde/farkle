@@ -1,16 +1,17 @@
 let roll = [];
+let currentPlayerHand = [];
 
 class Player {
 	constructor (name, hand, handScore, tempScore, totalScore) {
 		this.name = name;
-		this.hand = [];
 		this.handScore = handScore;
 		this.tempScore = tempScore;
 		this.totalScore = totalScore;
 	};
 };
 
-const currentPlayer = new Player();
+const PlayerOne = new Player();
+const PlayerTwo = new Player();
 
 const rollDice = () => {
 	for (let i = 0; i < 6; i++) {
@@ -34,11 +35,11 @@ const addOrRemoveDieFromHand = () => {
 		let dieRemovedFromRoll = roll.splice(rollIndex, 1)[0];
 		$(e.currentTarget).removeClass('rollDie').addClass('handDie');
 		$(e.currentTarget).detach().appendTo('.currentPlayerHand');
-		currentPlayer.hand.push(dieRemovedFromRoll);
+		currentPlayerHand.push(dieRemovedFromRoll);
 		
 		$('.handDie').off('click').on('click', (e) => {
 			let handIndex = $(e.currentTarget).index('.handDie');
-			let dieRemovedFromHand = currentPlayer.hand.splice(handIndex, 1)[0];
+			let dieRemovedFromHand = currentPlayerHand.splice(handIndex, 1)[0];
 			$(e.currentTarget).removeClass('handDie').addClass('rollDie');
 			$(e.currentTarget).detach().appendTo('.roll');
 			roll.push(dieRemovedFromHand);
