@@ -129,21 +129,18 @@ const scoreSixes = () => {
 const scoreFourOfAKind = () => {
 	if (countOfTwos == 4 || countOfThrees == 4 || countOfFours == 4 || countOfSixes == 4) {
 		handScore += 1000;
-		return true;
 	};
 };
 
 const scoreFiveOfAKind = () => {
 	if (countOfTwos == 5 || countOfThrees == 5 || countOfFours == 5 || countOfSixes == 5) {
 		handScore += 2000;
-		return true;
 	};
 };
 
 const scoreSixOfAKind = () => {
 	if (countOfOnes == 6 || countOfTwos == 6 || countOfThrees == 6 || countOfFours == 6 || countOfFives == 6 || countOfSixes == 6) {
 		handScore += 3000;
-		return true;
 	};
 };
 
@@ -158,7 +155,6 @@ const scoreStraight = () => {
 	};
 	if (straight.length == 6) {
 		handScore += 1500;
-		return true;
 	};
 };
 
@@ -166,9 +162,8 @@ const scoreThreePairs = () => {
 	currentPlayerHand.sort(function(a,b){
 		return a - b;
 	});
-	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand[1]) && (currentPlayerHand[2] == currentPlayerHand[3]) && (currentPlayerHand[4] == currentPlayerHand[5])) {
+	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand[1]) && (currentPlayerHand[2] == currentPlayerHand[3]) && (currentPlayerHand[4] == currentPlayerHand[5]) && (currentPlayerHand[0] != currentPlayerHand[5])) {
 		handScore += 1500;
-		return true;
 	};
 };
 
@@ -176,38 +171,48 @@ const scoreTwoTriplets = () => {
 	currentPlayerHand.sort(function(a,b){
 		return a - b;
 	});
-	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand [1]) && (currentPlayerHand[0] == currentPlayerHand[2]) && (currentPlayerHand[3] == currentPlayerHand[4]) && (currentPlayerHand[3] == currentPlayerHand[5])) {
+	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand [1]) && (currentPlayerHand[0] == currentPlayerHand[2]) && (currentPlayerHand[3] == currentPlayerHand[4]) && (currentPlayerHand[3] == currentPlayerHand[5]) && (currentPlayerHand[2] != currentPlayerHand[3])) {
 		handScore += 2500;
-		return true;
 	};
 };
 
 const scoreHand = () => {
-	if (scoreTwoTriplets()) {
-		scoreTwoTriplets();
-	} else if (scoreThreePairs()) {
-		scoreThreePairs();
-	} else 
-	if (scoreStraight()) {
-		scoreStraight();
-	} else if (scoreSixOfAKind()) {
-		scoreSixOfAKind();
-	} else if (scoreFiveOfAKind()) {
-		scoreFiveOfAKind();
-		scoreOnes();
-		scoreFives();
-	} else if (scoreFourOfAKind()) {
-		scoreFourOfAKind();
-		scoreOnes();
-		scoreFives();
-	} else {
-		scoreOnes();
-		scoreTwos();
-		scoreThrees();
-		scoreFours();
-		scoreFives();
-		scoreSixes();
+	let length = currentPlayerHand.length;
+	switch (length) {
+		case 1:
+			scoreOnes();
+			scoreFives();
+			break;
+		case 2:
+			scoreOnes();
+			scoreFives();
+			break;
+		case 3:
+			scoreOnes();
+			scoreTwos();
+			scoreThrees();
+			scoreFours();
+			scoreFives();
+			scoreSixes();
+			break;
+		case 4:
+			scoreFourOfAKind();
+			scoreOnes();
+			scoreFives();
+			break;
+		case 5:
+			scoreFiveOfAKind();
+			scoreOnes();
+			scoreFives();
+			break;
+		case 6:
+			scoreSixOfAKind();
+			scoreStraight();
+			scoreThreePairs();
+			scoreTwoTriplets();
+			break;
 	};
+	$('.pointsInHand').text(`Points in Hand: ${handScore}`);
 };
 
 
@@ -216,4 +221,4 @@ rollDice();
 displayRoll();
 addOrRemoveDieFromHand();
 countDieInHand();
-// scoreHand();
+scoreHand();
