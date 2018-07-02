@@ -27,20 +27,18 @@ const playerTwo = new Player();
 const game = {
 	activePlayer: playerOne,
 	playHand() {
-		rollDice();
-		displayRoll();
+		rollDice(6);
+		// displayRoll();
 		addOrRemoveDieFromHand();
-		countDieInHand();
-		scoreHand();
 	} 
 }
 
-const rollDice = () => {
-	// for (let i = 0; i < 6; i++) {
-	// 	let randomNumber = Math.floor(Math.random() * 6) + 1;
-	// 	roll.push(randomNumber);
-	// };
-	roll = [6,6,6,6,6,6]
+const rollDice = (rollLength) => {
+	for (let i = 0; i < rollLength; i++) {
+		let randomNumber = Math.floor(Math.random() * 6) + 1;
+		roll.push(randomNumber);
+	};
+	displayRoll();
 };
 
 const displayRoll = () => {
@@ -163,12 +161,8 @@ const scoreFiveOfAKind = () => {
 };
 
 const scoreSixOfAKind = () => {
-	console.log("CHECKING FOR SIX OF A KIND")
-	console.log(countOfSixes)
 	if (countOfOnes == 6 || countOfTwos == 6 || countOfThrees == 6 || countOfFours == 6 || countOfFives == 6 || countOfSixes == 6) {
-		console.log("HOORAY SIX OF A KIND")
 		handScore += 3000;
-		console.log(`HAND SCORE IS NOW ${handScore}`)
 	};
 };
 
@@ -206,16 +200,12 @@ const scoreTwoTriplets = () => {
 
 const scoreHand = () => {
 	countDieInHand();
-	console.log("SCORING HAND")
-	console.log(currentPlayerHand)
 	handScore = 0;
 	let length = currentPlayerHand.length;
 	switch (length) {
 		case 1:
-			scoreOnes(currentPlayerHand);
-			console.log('case 1')
+			scoreOnes();
 			scoreFives();
-			console.log('case 1b')
 			break;
 		case 2:
 			scoreOnes();
@@ -232,12 +222,21 @@ const scoreHand = () => {
 		case 4:
 			scoreFourOfAKind();
 			scoreOnes();
+			scoreTwos();
+			scoreThrees();
+			scoreFours();
 			scoreFives();
+			scoreSixes();
 			break;
 		case 5:
 			scoreFiveOfAKind();
+			scoreFourOfAKind();
 			scoreOnes();
+			scoreTwos();
+			scoreThrees();
+			scoreFours();
 			scoreFives();
+			scoreSixes();
 			break;
 		case 6:
 			scoreSixOfAKind();
@@ -249,19 +248,24 @@ const scoreHand = () => {
 	$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
 };
 
-// const scoring = {
-// 	1: function() {
-// 		scoreOnes();
-// 		scoreFives();
-// 	}
-// }
-
-// // const scoreHand = scoring[1];
-// // scoreHand();
-
-
-
+const endHand = () => {
+	$('.rollAgain').on('click', (e) => {
+		console.log('click');
+		let tempScore = handScore;
+		console.log(tempScore);
+		$('.tempScore').text(`Points this turn: ${tempScore}`);
+		handScore = 0;
+		console.log(handScore);
+		$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
+		$('.handDie').remove();
+		// $('.rollDie').remove();
+		console.log(roll.length);
+		rollDice(roll.length);
+		// displayRoll(newRoll);
+	})
+}
 
 game.playHand();
+endHand();
 
 
