@@ -1,3 +1,5 @@
+// let activePlayer = playerOne;
+
 let roll = [];
 let currentPlayerHand = [];
 let handScore = 0;
@@ -8,6 +10,8 @@ let countOfFours = 0;
 let countOfFives = 0;
 let countOfSixes = 0;
 
+
+
 class Player {
 	constructor (name, hand, handScore, tempScore, totalScore) {
 		this.name = name;
@@ -17,14 +21,26 @@ class Player {
 	};
 };
 
-const PlayerOne = new Player();
-const PlayerTwo = new Player();
+const playerOne = new Player();
+const playerTwo = new Player();
+
+const game = {
+	activePlayer: playerOne,
+	playHand() {
+		rollDice();
+		displayRoll();
+		addOrRemoveDieFromHand();
+		countDieInHand();
+		scoreHand();
+	} 
+}
 
 const rollDice = () => {
-	for (let i = 0; i < 6; i++) {
-		let randomNumber = Math.floor(Math.random() * 6) + 1;
-		roll.push(randomNumber);
-	};
+	// for (let i = 0; i < 6; i++) {
+	// 	let randomNumber = Math.floor(Math.random() * 6) + 1;
+	// 	roll.push(randomNumber);
+	// };
+	roll = [6,6,6,6,6,6]
 };
 
 const displayRoll = () => {
@@ -43,6 +59,7 @@ const addOrRemoveDieFromHand = () => {
 		$(e.currentTarget).removeClass('rollDie').addClass('handDie');
 		$(e.currentTarget).detach().appendTo('.currentPlayerHand');
 		currentPlayerHand.push(dieRemovedFromRoll);
+		scoreHand();
 		
 		$('.handDie').off('click').on('click', (e) => {
 			let handIndex = $(e.currentTarget).index('.handDie');
@@ -50,12 +67,19 @@ const addOrRemoveDieFromHand = () => {
 			$(e.currentTarget).removeClass('handDie').addClass('rollDie');
 			$(e.currentTarget).detach().appendTo('.roll');
 			roll.push(dieRemovedFromHand);
+			scoreHand();
 		});
 	});
 };
 
 
 const countDieInHand = () => {
+	countOfOnes = 0;
+	countOfTwos = 0;
+	countOfThrees = 0;
+	countOfFours = 0;
+	countOfFives = 0;
+	countOfSixes = 0;
 	for (let i = 0; i < currentPlayerHand.length; i++) {
 		if (currentPlayerHand[i] == 1) {
 			countOfOnes ++;
@@ -139,8 +163,12 @@ const scoreFiveOfAKind = () => {
 };
 
 const scoreSixOfAKind = () => {
+	console.log("CHECKING FOR SIX OF A KIND")
+	console.log(countOfSixes)
 	if (countOfOnes == 6 || countOfTwos == 6 || countOfThrees == 6 || countOfFours == 6 || countOfFives == 6 || countOfSixes == 6) {
+		console.log("HOORAY SIX OF A KIND")
 		handScore += 3000;
+		console.log(`HAND SCORE IS NOW ${handScore}`)
 	};
 };
 
@@ -177,11 +205,17 @@ const scoreTwoTriplets = () => {
 };
 
 const scoreHand = () => {
+	countDieInHand();
+	console.log("SCORING HAND")
+	console.log(currentPlayerHand)
+	handScore = 0;
 	let length = currentPlayerHand.length;
 	switch (length) {
 		case 1:
-			scoreOnes();
+			scoreOnes(currentPlayerHand);
+			console.log('case 1')
 			scoreFives();
+			console.log('case 1b')
 			break;
 		case 2:
 			scoreOnes();
@@ -212,13 +246,22 @@ const scoreHand = () => {
 			scoreTwoTriplets();
 			break;
 	};
-	$('.pointsInHand').text(`Points in Hand: ${handScore}`);
+	$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
 };
 
+// const scoring = {
+// 	1: function() {
+// 		scoreOnes();
+// 		scoreFives();
+// 	}
+// }
+
+// // const scoreHand = scoring[1];
+// // scoreHand();
 
 
-rollDice();
-displayRoll();
-addOrRemoveDieFromHand();
-countDieInHand();
-scoreHand();
+
+
+game.playHand();
+
+
