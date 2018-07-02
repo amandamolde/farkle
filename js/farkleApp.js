@@ -38,18 +38,49 @@ const addDieToHand = () => {
 		// $(e.currentTarget).css("background-color", "gray");
 		let rollIndex = $(e.currentTarget).index('.rollDie');
 		console.log(rollIndex);
-		let removedDie = roll.splice(rollIndex, 1)[0];
+		let dieRemovedFromRoll = roll.splice(rollIndex, 1)[0];
+		$(e.currentTarget).removeClass('rollDie').addClass('handDie');
 		$(e.currentTarget).detach().appendTo('.currentPlayerHand');
 		console.log(roll + ' is the roll');
-		console.log(removedDie + ' is the removedDie');
-		currentPlayer.hand.push(removedDie);
+		console.log(dieRemovedFromRoll + ' is the die removed from the roll');
+		currentPlayer.hand.push(dieRemovedFromRoll);
 		console.log(currentPlayer.hand + ' is the playerHand');
+		$('.handDie').off('click').on('click', (e) => {
+			console.log('the hand die has been clicked');
+			let handIndex = $(e.currentTarget).index('.handDie');
+			console.log(handIndex);
+			let dieRemovedFromHand = currentPlayer.hand.splice(handIndex, 1)[0];
+			$(e.currentTarget).removeClass('handDie').addClass('rollDie');
+			$(e.currentTarget).detach().appendTo('.roll');
+			console.log(dieRemovedFromHand + ' is the die removed from the hand');
+			roll.push(dieRemovedFromHand);
+			console.log(roll + ' is the roll');
+			console.log(currentPlayer.hand + ' is the playerHand');
+		});
 	});
 };
+
+// const removeDieFromHand = () => {
+// 	$('.handDie').off('click').on('click', (e) => {
+// 		console.log(e.currentTarget);
+// 		console.log('clicked!')
+// 		// $(e.currentTarget).css("background-color", "gray");
+// 		let handIndex = $(e.currentTarget).index('.handDie');
+// 		console.log(handIndex);
+// 		let dieRemovedFromHand = currentPlayerHand.splice(handIndex, 1)[0];
+// 		$(e.currentTarget).removeClass('handDie').addClass('rollDie');
+// 		$(e.currentTarget).detach().appendTo('.roll');
+// 		console.log(roll + ' is the roll');
+// 		console.log(dieRemovedFromHand + ' is the die removed from the hand');
+// 		roll.push(dieRemovedFromHand);
+// 		console.log(currentPlayer.hand + ' is the playerHand');
+// 	});
+// };
 
 
 
 rollDice();
 displayRoll();
 addDieToHand();
+// removeDieFromHand();
 
