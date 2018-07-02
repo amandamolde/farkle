@@ -166,7 +166,7 @@ const scoreThreePairs = () => {
 	currentPlayerHand.sort(function(a,b){
 		return a - b;
 	});
-	if (currentPlayerHand[0] == currentPlayerHand[1] && currentPlayerHand[2] == currentPlayerHand[3] && currentPlayerHand[4] == currentPlayerHand[5]) {
+	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand[1]) && (currentPlayerHand[2] == currentPlayerHand[3]) && (currentPlayerHand[4] == currentPlayerHand[5])) {
 		handScore += 1500;
 		return true;
 	};
@@ -176,7 +176,7 @@ const scoreTwoTriplets = () => {
 	currentPlayerHand.sort(function(a,b){
 		return a - b;
 	});
-	if (currentPlayerHand[0] == currentPlayerHand [1] && currentPlayerHand[0] == currentPlayerHand[2] && currentPlayerHand[3] == currentPlayerHand[4] && currentPlayerHand[3] == currentPlayerHand[5]) {
+	if (currentPlayerHand.length == 6 && (currentPlayerHand[0] == currentPlayerHand [1]) && (currentPlayerHand[0] == currentPlayerHand[2]) && (currentPlayerHand[3] == currentPlayerHand[4]) && (currentPlayerHand[3] == currentPlayerHand[5])) {
 		handScore += 2500;
 		return true;
 	};
@@ -187,7 +187,8 @@ const scoreHand = () => {
 		scoreTwoTriplets();
 	} else if (scoreThreePairs()) {
 		scoreThreePairs();
-	} else if (scoreStraight()) {
+	} else 
+	if (scoreStraight()) {
 		scoreStraight();
 	} else if (scoreSixOfAKind()) {
 		scoreSixOfAKind();
@@ -215,4 +216,4 @@ rollDice();
 displayRoll();
 addOrRemoveDieFromHand();
 countDieInHand();
-scoreHand();
+// scoreHand();
