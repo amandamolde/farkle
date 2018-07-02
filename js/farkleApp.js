@@ -81,6 +81,10 @@ const scoreOnes = () => {
 		handScore += 200;
 	} else if (countOfOnes == 3) {
 		handScore += 300;
+	} else if (countOfOnes == 4) {
+		handScore += 1000;
+	} else if (countOfOnes == 5) {
+		handScore += 2000;
 	};
 };
 
@@ -109,6 +113,10 @@ const scoreFives = () => {
 		handScore += 100;
 	} else if (countOfFives == 3) {
 		handScore += 500;
+	} else if (countOfFives == 4) {
+		handScore += 1000;
+	} else if (countOfFives == 5) {
+		handScore += 2000;
 	};
 };
 
@@ -119,14 +127,14 @@ const scoreSixes = () => {
 };
 
 const scoreFourOfAKind = () => {
-	if (countOfOnes == 4 || countOfTwos == 4 || countOfThrees == 4 || countOfFours == 4 || countOfFives == 4 || countOfSixes == 4) {
+	if (countOfTwos == 4 || countOfThrees == 4 || countOfFours == 4 || countOfSixes == 4) {
 		handScore += 1000;
 		return true;
 	};
 };
 
 const scoreFiveOfAKind = () => {
-	if (countOfOnes == 5 || countOfTwos == 5 || countOfThrees == 5 || countOfFours == 5 || countOfFives == 5 || countOfSixes == 5) {
+	if (countOfTwos == 5 || countOfThrees == 5 || countOfFours == 5 || countOfSixes == 5) {
 		handScore += 2000;
 		return true;
 	};
