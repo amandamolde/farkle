@@ -162,8 +162,32 @@ const scoreStraight = () => {
 	};
 };
 
+const scoreThreePairs = () => {
+	currentPlayerHand.sort(function(a,b){
+		return a - b;
+	});
+	if (currentPlayerHand[0] == currentPlayerHand[1] && currentPlayerHand[2] == currentPlayerHand[3] && currentPlayerHand[4] == currentPlayerHand[5]) {
+		handScore += 1500;
+		return true;
+	};
+};
+
+const scoreTwoTriplets = () => {
+	currentPlayerHand.sort(function(a,b){
+		return a - b;
+	});
+	if (currentPlayerHand[0] == currentPlayerHand [1] && currentPlayerHand[0] == currentPlayerHand[2] && currentPlayerHand[3] == currentPlayerHand[4] && currentPlayerHand[3] == currentPlayerHand[5]) {
+		handScore += 2500;
+		return true;
+	};
+};
+
 const scoreHand = () => {
-	if (scoreStraight()) {
+	if (scoreTwoTriplets()) {
+		scoreTwoTriplets();
+	} else if (scoreThreePairs()) {
+		scoreThreePairs();
+	} else if (scoreStraight()) {
 		scoreStraight();
 	} else if (scoreSixOfAKind()) {
 		scoreSixOfAKind();
