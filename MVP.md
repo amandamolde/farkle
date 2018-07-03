@@ -5,7 +5,7 @@ roll - player begins with whatever dice they have left
 
 MVP:
 <!-- 1. Player 1 and Player 2 displayed as text on screen -->
-2. Switch between players each turn
+<!-- 2. Switch between players each turn -->
 3. Highlight which player's turn it is
 <!-- 4. Roll dice function for 6 dice (Math.random) -->
 <!-- 5. Click on a die to select it for hand -->
@@ -15,7 +15,7 @@ MVP:
 9. Check for farkle
 <!-- 10. Remove hand die from dice available to roll next roll -->
 <!-- 11. Evaluate hand for score -->
-12. Display handScore, tempScore, realScore
+<!-- 12. Display handScore, tempScore, realScore -->
 <!-- 13. Store tempScore at end of each roll -->
 <!-- 14. Button for banking tempScore to realScore -->
 15. Check for farkle each roll

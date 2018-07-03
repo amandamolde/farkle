@@ -21,6 +21,8 @@ class Player {
 const playerOne = new Player();
 const playerTwo = new Player();
 
+playerOne.totalScore = 9000;
+
 const game = {
 	activePlayer: playerOne,
 	startHand() {
@@ -294,7 +296,30 @@ const bankPoints = () => {
 		handScore = 0;
 		$('.tempScore').text(`Points this turn (aka tempScore): ${tempScore}`);
 		$('.pointsInHand').text(`Points from Selected Dice (aka handScore): ${handScore}`);
-		if (game.activePlayer == playerOne) {
+		checkForWinner();
+		switchActivePlayer();
+		roll = [];
+		currentPlayerHand = [];
+		$('.handDie').remove();
+		$('.rollDie').remove();
+		game.startHand();
+	});
+};
+
+const checkForWinner = () => {
+	if (game.activePlayer.totalScore >= 10000) {
+		alert("FINAL TURN!!!");
+	}
+}
+
+const endGame = () => {
+	if (checkForWinner()) {
+
+	}
+}
+
+const switchActivePlayer = () => {
+	if (game.activePlayer == playerOne) {
 			$('.playerOneScore').text(`${playerOne.totalScore}`);
 			game.activePlayer = playerTwo;
 			alert ("It is Player Two's turn");
@@ -304,17 +329,12 @@ const bankPoints = () => {
 			alert ("It is Player One's turn");
 		};
 		console.log(game.activePlayer);
-		roll = [];
-		currentPlayerHand = [];
-		$('.handDie').remove();
-		$('.rollDie').remove();
-		game.startHand();
-	});
-};
+	};
 
 game.startHand();
 bankPoints();
 rollAgain();
+// checkForWinner();
 // bankPoints();
 
 
