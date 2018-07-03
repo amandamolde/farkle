@@ -297,11 +297,15 @@ const endGame = () => {
 const switchActivePlayer = () => {
 	if (game.activePlayer == playerOne) {
 		$('.playerOneScore').text(`${playerOne.totalScore}`);
+		$('.playerOneName').removeClass('highlight');
 		game.activePlayer = playerTwo;
+		$('.playerTwoName').addClass('highlight');
 		alert ("It is Player Two's turn");
 	} else if (game.activePlayer == playerTwo) {
 		$('.playerTwoScore').text(`${playerTwo.totalScore}`);
+		$('.playerTwoName').removeClass('highlight');
 		game.activePlayer = playerOne;
+		$('.playerOneName').addClass('highlight');
 		alert ("It is Player One's turn");
 	};
 };
