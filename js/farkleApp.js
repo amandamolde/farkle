@@ -3,6 +3,7 @@
 let roll = [];
 let currentPlayerHand = [];
 let handScore = 0;
+let tempScore = 0;
 let countOfOnes = 0;
 let countOfTwos = 0;
 let countOfThrees = 0;
@@ -13,11 +14,9 @@ let countOfSixes = 0;
 
 
 class Player {
-	constructor (name, hand, handScore, tempScore, totalScore) {
+	constructor (name) {
 		this.name = name;
-		this.handScore = handScore;
-		this.tempScore = tempScore;
-		this.totalScore = totalScore;
+		this.totalScore = 0;
 	};
 };
 
@@ -210,8 +209,11 @@ const scoreTwoTriplets = () => {
 };
 
 const scoreHand = () => {
+	console.log(handScore + " is the handScore at the beg of scoreHand");
+	console.log(currentPlayerHand + " is the currentPlayerHand at scoreHand");
 	countDieInHand();
 	handScore = 0;
+	console.log(handScore + " is the handScore after being reset in scoreHand");
 	let length = currentPlayerHand.length;
 	switch (length) {
 		case 1:
@@ -256,18 +258,19 @@ const scoreHand = () => {
 			scoreTwoTriplets();
 			break;
 	};
+	console.log(handScore + " is the handScore at the end of scoreHand");
 	$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
 };
 
 const rollAgain = () => {
 	$('.rollAgain').on('click', (e) => {
 		console.log('click');
-		let tempScore = handScore;
+		tempScore += handScore;
 		console.log(tempScore + " is the tempScore");
-		$('.tempScore').text(`Points this turn: ${tempScore}`);
+		$('.tempScore').text(`Points this turn (aka tempScore): ${tempScore}`);
 		handScore = 0;
 		console.log(handScore + " is the handScore");
-		$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
+		$('.pointsInHand').text(`Points from Selected Dice (aka handScore): ${handScore}`);
 		$('.handDie').remove();
 		$('.rollDie').remove();
 		rollLength = roll.length;
@@ -277,10 +280,24 @@ const rollAgain = () => {
 		console.log("roll again");
 		// displayRoll(newRoll);
 		addOrRemoveDieFromHand();
+		currentPlayerHand = [];
+	})
+}
+
+const bankPoints = () => {
+	$('.bankPoints').on('click', (e) => {
+		console.log('bankPoints clicked');
+		tempScore += handScore;
+		game.activePlayer.totalScore = tempScore;
+		console.log(playerOne.totalScore + " is playerOne's score");
+		console.log(playerTwo.totalScore + " is playerTwo's score");
+		tempScore = 0;
 	})
 }
 
 game.startHand();
+bankPoints();
 rollAgain();
+// bankPoints();
 
 
