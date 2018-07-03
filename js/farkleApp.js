@@ -26,22 +26,32 @@ const playerTwo = new Player();
 
 const game = {
 	activePlayer: playerOne,
-	playHand() {
+	startHand() {
 		rollDice(6);
-		// displayRoll();
+		// console.log("Initial Roll in playHand");
+		// console.log(roll.length + " is the roll length");
+		// console.log(roll + " is the roll at playHand");
+		displayRoll();
 		addOrRemoveDieFromHand();
 	} 
 }
 
 const rollDice = (rollLength) => {
+	// console.log('rolling dice')
+	// console.log(roll.length + " is the roll length");
+	// console.log(roll + " is the roll at rollDice");
+	// roll = [];
 	for (let i = 0; i < rollLength; i++) {
 		let randomNumber = Math.floor(Math.random() * 6) + 1;
 		roll.push(randomNumber);
 	};
 	displayRoll();
+	console.log(roll + " is the newRoll at rollDice");
 };
 
 const displayRoll = () => {
+	console.log('display roll')
+	$('.roll').empty();
 	for (let i = 0; i < roll.length; i++) {
 		let dieValue = roll[i];
 		const die = $(`<div class="die rollDie">${dieValue}</div>`);
@@ -51,6 +61,7 @@ const displayRoll = () => {
 };
 
 const addOrRemoveDieFromHand = () => {
+	console.log("adding or removing die from hand");
 	$('.rollDie').on('click', (e) => {
 		let rollIndex = $(e.currentTarget).index('.rollDie');
 		let dieRemovedFromRoll = roll.splice(rollIndex, 1)[0];
@@ -248,24 +259,28 @@ const scoreHand = () => {
 	$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
 };
 
-const endHand = () => {
+const rollAgain = () => {
 	$('.rollAgain').on('click', (e) => {
 		console.log('click');
 		let tempScore = handScore;
-		console.log(tempScore);
+		console.log(tempScore + " is the tempScore");
 		$('.tempScore').text(`Points this turn: ${tempScore}`);
 		handScore = 0;
-		console.log(handScore);
+		console.log(handScore + " is the handScore");
 		$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
 		$('.handDie').remove();
-		// $('.rollDie').remove();
+		$('.rollDie').remove();
+		rollLength = roll.length;
 		console.log(roll.length);
-		rollDice(roll.length);
+		roll = [];
+		rollDice(rollLength);
+		console.log("roll again");
 		// displayRoll(newRoll);
+		addOrRemoveDieFromHand();
 	})
 }
 
-game.playHand();
-endHand();
+game.startHand();
+rollAgain();
 
 
