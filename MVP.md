@@ -17,7 +17,7 @@ MVP:
 <!-- 11. Evaluate hand for score -->
 12. Display handScore, tempScore, realScore
 <!-- 13. Store tempScore at end of each roll -->
-14. Button for banking tempScore to realScore
+<!-- 14. Button for banking tempScore to realScore -->
 15. Check for farkle each roll
 16. Check for winner at end of each turn - other player then gets one last turn
 

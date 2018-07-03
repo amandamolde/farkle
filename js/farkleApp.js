@@ -1,5 +1,3 @@
-// let activePlayer = playerOne;
-
 let roll = [];
 let currentPlayerHand = [];
 let handScore = 0;
@@ -287,13 +285,32 @@ const rollAgain = () => {
 const bankPoints = () => {
 	$('.bankPoints').on('click', (e) => {
 		console.log('bankPoints clicked');
+		console.log(game.activePlayer);
 		tempScore += handScore;
-		game.activePlayer.totalScore = tempScore;
+		game.activePlayer.totalScore += tempScore;
 		console.log(playerOne.totalScore + " is playerOne's score");
 		console.log(playerTwo.totalScore + " is playerTwo's score");
 		tempScore = 0;
-	})
-}
+		handScore = 0;
+		$('.tempScore').text(`Points this turn (aka tempScore): ${tempScore}`);
+		$('.pointsInHand').text(`Points from Selected Dice (aka handScore): ${handScore}`);
+		if (game.activePlayer == playerOne) {
+			$('.playerOneScore').text(`${playerOne.totalScore}`);
+			game.activePlayer = playerTwo;
+			alert ("It is Player Two's turn");
+		} else if (game.activePlayer == playerTwo) {
+			$('.playerTwoScore').text(`${playerTwo.totalScore}`);
+			game.activePlayer = playerOne;
+			alert ("It is Player One's turn");
+		};
+		console.log(game.activePlayer);
+		roll = [];
+		currentPlayerHand = [];
+		$('.handDie').remove();
+		$('.rollDie').remove();
+		game.startHand();
+	});
+};
 
 game.startHand();
 bankPoints();
