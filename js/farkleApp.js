@@ -8,6 +8,9 @@ let countOfThrees = 0;
 let countOfFours = 0;
 let countOfFives = 0;
 let countOfSixes = 0;
+let rollCounter = 0;
+$('.rollAgain').hide();
+$('.bankPoints').hide();
 
 
 
@@ -24,9 +27,7 @@ const playerTwo = new Player();
 const game = {
 	activePlayer: playerOne,
 	playTurn() {
-		rollDice(6);
-		displayRoll();
-		addOrRemoveDieFromHand(); //&scoreHand;
+		startTurn();
 		rollAgain();
 		bankPoints();
 	} 
@@ -37,6 +38,8 @@ const rollDice = (numOfDice) => {
 		let randomNumber = Math.floor(Math.random() * 6) + 1;
 		roll.push(randomNumber);
 	};
+	rollCounter ++;
+	console.log(rollCounter + " is the rollCounter after rollDice");
 };
 
 const displayRoll = () => {
@@ -268,7 +271,8 @@ const rollAgain = () => {
 };
 
 const bankPoints = () => {
-	$('.bankPoints').on('click', (e) => {
+	$('.bankPoints').one('click', (e) => {
+		console.log("BANK POINTS CLICKED!!!");
 		checkForFarkle();
 		tempScore += handScore;
 		game.activePlayer.totalScore += tempScore;
@@ -278,7 +282,11 @@ const bankPoints = () => {
 		checkForWinner();
 		switchActivePlayer();
 		clearRoll();
-		game.playerTurn();
+		$('.startTurn').show();
+		$('.rollAgain').hide();
+		$('.bankPoints').hide();
+		game.playTurn();
+		// $(this).off('click');
 	});
 };
 
@@ -286,13 +294,7 @@ const checkForWinner = () => {
 	if (game.activePlayer.totalScore >= 10000) {
 		alert("FINAL TURN!!!");
 	}
-}
-
-const endGame = () => {
-	if (checkForWinner()) {
-
-	}
-}
+};
 
 const switchActivePlayer = () => {
 	if (game.activePlayer == playerOne) {
@@ -301,18 +303,24 @@ const switchActivePlayer = () => {
 		game.activePlayer = playerTwo;
 		$('.playerTwoName').addClass('highlight');
 		alert ("It is Player Two's turn");
+		rollCounter = 0;
+		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player2");
 	} else if (game.activePlayer == playerTwo) {
 		$('.playerTwoScore').text(`${playerTwo.totalScore}`);
 		$('.playerTwoName').removeClass('highlight');
 		game.activePlayer = playerOne;
 		$('.playerOneName').addClass('highlight');
 		alert ("It is Player One's turn");
+		rollCounter = 0;
+		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player1");
 	};
 };
 
 const checkForFarkle = () => {
-	if (currentPlayerHand.length == 0 || handScore == 0) {
+	if (rollCounter != 0 && handScore == 0) {
 		alert("FARKLE!!!")
+		switchActivePlayer();
+		clearRoll();
 	};
 };
 
@@ -326,6 +334,19 @@ const clearRoll = () => {
 	currentPlayerHand = [];
 	$('.handDie').remove();
 	$('.rollDie').remove();
+};
+
+const startTurn = () =>{
+	$('.startTurn').one('click', (e) => {
+		console.log("BUTTON CLICKED!!!!");
+		console.log(rollCounter + " is the initial rollCounter");
+		$('.startTurn').hide();
+		$('.rollAgain').show();
+		$('.bankPoints').show();
+		rollDice(6);
+		displayRoll();
+		addOrRemoveDieFromHand();
+	});
 };
 
 game.playTurn();
