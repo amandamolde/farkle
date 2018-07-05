@@ -56,17 +56,17 @@ const displayRoll = () => {
 		let faceImage = '';
 
 		if(dieValue == 1) {
-			faceImage = 'images/Dice-1.png';
+			faceImage = 'images/die_face_1_T.png';
 		} else if (dieValue == 2) {
-			faceImage = 'images/Dice-2.png';
+			faceImage = 'images/die_face_2_T.png';
 		} else if (dieValue == 3) {
-			faceImage = 'images/Dice-3.png';
+			faceImage = 'images/die_face_3_T.png';
 		} else if (dieValue == 4) {
-			faceImage = 'images/Dice-4.png';
+			faceImage = 'images/die_face_4_T.png';
 		} else if (dieValue == 5) {
-			faceImage = 'images/Dice-5.png';
+			faceImage = 'images/die_face_5_T.png';
 		} else if (dieValue == 6) {
-			faceImage = 'images/Dice-6.png';
+			faceImage = 'images/die_face_6_T.png';
 		};
 
 
