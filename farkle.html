@@ -1,39 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/farkleStyle.css">
 	<title>Farkle</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Bootstrap Theme CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- My Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="css/farkleStyle.css">
+	
 </head>
 <body>
-	<h1>Farkle</h1>
-	<h2 class="playerOneName highlight">Player 1</h2>
-	<h3>Score:</h3><h3 class="playerOneScore"></h3>
-	<h2 class="playerTwoName">Player 2</h2>
-	<h3>Score:</h3><h3 class="playerTwoScore"></h3>
+	<div class="container">
 
-	<div class="roll">
-		<h4>The roll is:</h4>
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Farkle</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h2 class="playerOneName highlight">Player 1</h2>
+				<h3>Score:</h3><h3 class="playerOneScore"></h3>
+			</div>
+			<div class="col-md-6">
+				<h2 class="playerTwoName">Player 2</h2>
+				<h3>Score:</h3><h3 class="playerTwoScore"></h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="roll">
+					<h4>The roll is:</h4>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="currentPlayerHand">
+					<h4>Selected Dice:</h4>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12 messages">
+			</div>
+		</div>	
+
+		<div class="row">
+			<div class="col-md-6">
+				<h5 class="pointsInHand">Points from Selected Dice (aka handScore):</h5>
+			</div>
+			<div class="col-md-6">
+				<h5 class="tempScore">Points this turn (aka tempScore):</h5>
+			</div>
+		</div>
+
+		<div class="roll">
+			<div class="col-md-6">
+				<button class="startTurn">Roll to Start Turn</button>
+			</div>
+			<div class="col-md-6">
+				<button class="rollAgain">Roll Again</button>
+			</div>
+			<div class="col-lg-12">
+				<button class="bankPoints">End Turn and Bank Points</button>
+			</div>
+		</div>
+
 	</div>
 
-	<div class="currentPlayerHand">
-		<h4>Selected Dice:</h4>
-	</div>
+	<!-- jQuery Script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
-	<div>
-		<h5 class="pointsInHand">Points from Selected Dice (aka handScore):</h5>
-	</div>
+	<!-- Bootstrap Script -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<div>
-		<h5 class="tempScore">Points this turn (aka tempScore):</h5>
-	</div>
+	<!-- My Custom Script -->
+	<script type="text/javascript" src="js/farkleApp.js"></script>
 
-	<button class="startTurn">Roll to Start Turn</button>
-
-	<button class="rollAgain">Roll Again</button>
-
-	<button class="bankPoints">End Turn and Bank Points</button>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script type="text/javascript" src="js/farkleApp.js"></script>
 </body>
 </html>
