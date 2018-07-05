@@ -12,13 +12,13 @@ MVP:
 <!-- 6. Re-click on a die to de-select it for hand -->
 <!-- 7. "Next Roll" button - player ends current roll and moves score to tempScore -->
 8. Check if out of dice (allow hot hands? nice to have?)
-9. Check for farkle
+<!-- 9. Check for farkle -->
 <!-- 10. Remove hand die from dice available to roll next roll -->
 <!-- 11. Evaluate hand for score -->
 <!-- 12. Display handScore, tempScore, realScore -->
 <!-- 13. Store tempScore at end of each roll -->
 <!-- 14. Button for banking tempScore to realScore -->
-15. Check for farkle each roll
+<!-- 15. Check for farkle each roll -->
 16. Check for winner at end of each turn - other player then gets one last turn
 
 NICE TO HAVES:
