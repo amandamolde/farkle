@@ -258,7 +258,16 @@ const scoreHand = () => {
 
 const rollAgain = () => {
 	$('.rollAgain').off().on('click', (e) => {
-		if (!checkForFarkle()) {
+		if (rollCounter != 0 && handScore == 0) {
+			console.log("FARKLE on ROLL AGAIN");
+			switchActivePlayer();
+			displayScores();
+			clearRoll();
+			$('.startTurn').show();
+			$('.rollAgain').hide();
+			$('.bankPoints').hide();
+			game.playTurn();
+		} else {
 			console.log("FARKLE on roll again is not true");
 			tempScore += handScore;
 			console.log(handScore + " is the handScore at rollAgain before reset");
@@ -270,36 +279,52 @@ const rollAgain = () => {
 			rollDice(numOfDice);
 			displayRoll();
 			addOrRemoveDieFromHand();
-		} else if (checkForFarkle()) {
-			console.log("FARKLE ON ROLL AGAIN");
-				switchActivePlayer();
-				displayScores();
-				clearRoll();
-				$('.startTurn').show();
-				$('.rollAgain').hide();
-				$('.bankPoints').hide();
-				game.playTurn();
 		};
+
+
+
+		// if (!checkForFarkle()) {
+		// 	console.log("FARKLE on roll again is not true");
+		// 	tempScore += handScore;
+		// 	console.log(handScore + " is the handScore at rollAgain before reset");
+		// 	handScore = 0;
+		// 	console.log(handScore + " is the handScore at rollAgain after reset");
+		// 	displayScores();
+		// 	numOfDice = roll.length;
+		// 	clearRoll();
+		// 	rollDice(numOfDice);
+		// 	displayRoll();
+		// 	addOrRemoveDieFromHand();
+		// } else if (checkForFarkle()) {
+		// 	console.log("FARKLE ON ROLL AGAIN");
+		// 		switchActivePlayer();
+		// 		displayScores();
+		// 		clearRoll();
+		// 		$('.startTurn').show();
+		// 		$('.rollAgain').hide();
+		// 		$('.bankPoints').hide();
+		// 		game.playTurn();
+		// };
 	});
 };
 
 const bankPoints = () => {
-	$('.bankPoints').one('click', (e) => {
-		if (!checkForFarkle()) {
-			console.log("check for farkle on bankpoints is not true");
-			tempScore += handScore;
-			game.activePlayer.totalScore += tempScore;
-			handScore = 0;
-			displayScores();
-			checkForWinner();
+	$('.bankPoints').off().on('click', (e) => {
+		if (rollCounter != 0 && handScore == 0) {
+			console.log("FARKLE ON BANK POINTS");
 			switchActivePlayer();
+			displayScores();
 			clearRoll();
 			$('.startTurn').show();
 			$('.rollAgain').hide();
 			$('.bankPoints').hide();
 			game.playTurn();
-		} else if (checkForFarkle()) {
-			console.log("check for farkle on bankpoints IS true");
+		} else {
+			console.log("check for farkle on bankpoints is not true");
+			tempScore += handScore;
+			game.activePlayer.totalScore += tempScore;
+			handScore = 0;
+			checkForWinner();
 			switchActivePlayer();
 			displayScores();
 			clearRoll();
@@ -308,6 +333,32 @@ const bankPoints = () => {
 			$('.bankPoints').hide();
 			game.playTurn();
 		};
+
+
+
+		// if (!checkForFarkle()) {
+		// 	console.log("check for farkle on bankpoints is not true");
+		// 	tempScore += handScore;
+		// 	game.activePlayer.totalScore += tempScore;
+		// 	handScore = 0;
+		// 	displayScores();
+		// 	checkForWinner();
+		// 	switchActivePlayer();
+		// 	clearRoll();
+		// 	$('.startTurn').show();
+		// 	$('.rollAgain').hide();
+		// 	$('.bankPoints').hide();
+		// 	game.playTurn();
+		// } else if (checkForFarkle()) {
+		// 	console.log("check for farkle on bankpoints IS true");
+		// 	switchActivePlayer();
+		// 	displayScores();
+		// 	clearRoll();
+		// 	$('.startTurn').show();
+		// 	$('.rollAgain').hide();
+		// 	$('.bankPoints').hide();
+		// 	game.playTurn();
+		// };
 	});
 };
 
@@ -339,15 +390,16 @@ const switchActivePlayer = () => {
 	};
 };
 
-const checkForFarkle = () => {
-	if (rollCounter != 0 && handScore == 0) {
-		alert("FARKLE!!!")
-		console.log("SAD FACE FARKLE");
-		return true;
-	} else {
-		return false;
-	};
-};
+// const checkForFarkle = () => {
+// 	if (rollCounter != 0 && handScore == 0) {
+// 		// alert("FARKLE!!!")
+// 		console.log("SAD FACE FARKLE");
+// 		// return true;
+// 	// } else {
+// 		// return false;
+// 	};
+// 	// return true;
+// };
 
 const displayScores = () => {
 	$('.tempScore').text(`Points this turn (aka tempScore): ${tempScore}`);
@@ -362,7 +414,7 @@ const clearRoll = () => {
 };
 
 const startTurn = () =>{
-	$('.startTurn').one('click', (e) => {
+	$('.startTurn').off().on('click', (e) => {
 		console.log("BUTTON CLICKED!!!!");
 		console.log(rollCounter + " is the initial rollCounter");
 		$('.startTurn').hide();
