@@ -25,7 +25,7 @@ class Player {
 const playerOne = new Player();
 const playerTwo = new Player();
 
-playerOne.totalScore = 9900;
+playerTwo.totalScore = 9900;
 
 const game = {
 	activePlayer: playerOne,
@@ -284,7 +284,7 @@ const rollAgain = () => {
 		if (!finalTurn) {
 			if (rollCounter != 0 && handScore == 0) {
 				console.log("FARKLE on ROLL AGAIN");
-				alert("Farkle!!!");
+				$('.messages').append("<p>FARKLE</p>");
 				switchActivePlayer();
 				displayScores();
 				clearRoll();
@@ -308,7 +308,7 @@ const rollAgain = () => {
 		} else {
 			if(rollCounter != 0 && handScore ==0) {
 				console.log("FARKLE ON ROLL AGAIN LAST TURN");
-				alert("Farkle on last turn when you tried to roll again!!!");
+				$('.messages').append("<p>FARKLE</p>");
 				showWinner();
 			} else {
 				console.log("FARKLE on roll again is not true");
@@ -332,7 +332,7 @@ const bankPoints = () => {
 		if (!finalTurn) {
 			if (rollCounter != 0 && handScore == 0) {
 				console.log("FARKLE ON BANK POINTS");
-				alert("Farkle!!!");
+				$('.messages').append("<p>FARKLE</p>");
 				switchActivePlayer();
 				displayScores();
 				clearRoll();
@@ -346,7 +346,7 @@ const bankPoints = () => {
 				game.activePlayer.totalScore += tempScore;
 				handScore = 0;
 				if (game.activePlayer.totalScore >= 10000) {
-					alert("FINAL TURN!");
+					$('.messages').append("<p>FINAL TURN!</p>");
 					finalTurn = true;
 					switchActivePlayer();
 					displayScores();
@@ -368,7 +368,7 @@ const bankPoints = () => {
 		} else {
 			if (rollCounter != 0 && handScore == 0) {
 				console.log("FARKLE ON BANKPOINTS LAST TURN");
-				alert("Farkle on last turn!!!");
+				$('.messages').append("<p>FARKLE</p>");
 				showWinner();
 			} else {
 				showWinner();
@@ -383,7 +383,7 @@ const switchActivePlayer = () => {
 		$('.playerOneName').removeClass('highlight');
 		game.activePlayer = playerTwo;
 		$('.playerTwoName').addClass('highlight');
-		alert ("It is Player Two's turn");
+		$('.messages').append("<p>It is Player Two's turn</p>");
 		rollCounter = 0;
 		tempScore = 0;
 		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player2");
@@ -392,7 +392,7 @@ const switchActivePlayer = () => {
 		$('.playerTwoName').removeClass('highlight');
 		game.activePlayer = playerOne;
 		$('.playerOneName').addClass('highlight');
-		alert ("It is Player One's turn");
+		$('.messages').append("<p>It is Player One's turn</p>");
 		rollCounter = 0;
 		tempScore = 0;
 		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player1");
@@ -413,6 +413,7 @@ const clearRoll = () => {
 
 const startTurn = () =>{
 	$('.startTurn').off().on('click', (e) => {
+		$('.messages').empty();
 		console.log("BUTTON CLICKED!!!!");
 		console.log(rollCounter + " is the initial rollCounter");
 		$('.startTurn').hide();
@@ -422,6 +423,14 @@ const startTurn = () =>{
 		displayRoll();
 		addOrRemoveDieFromHand();
 	});
+};
+
+const showWinner = () => {
+	if (playerOne.totalScore > playerTwo.totalScore) {
+		$('.messages').append('<p>PLAYER ONE IS THE WINNER!!!</p>');
+	} else {
+		$('.messages').append('<p>PLAYER TWO IS THE WINNER!!!</p>');
+	}
 };
 
 game.playTurn();
