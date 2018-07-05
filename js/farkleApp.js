@@ -50,8 +50,28 @@ const displayRoll = () => {
 	$('.roll').empty();
 	for (let i = 0; i < roll.length; i++) {
 		let dieValue = roll[i];
-		const die = $(`<div class="die rollDie">${dieValue}</div>`);
+		const die = $(`<div class="die rollDie"></div>`);
 		$(die).attr("value", `${dieValue}`);
+
+		let faceImage = '';
+
+		if(dieValue == 1) {
+			faceImage = 'images/Dice-1.png';
+		} else if (dieValue == 2) {
+			faceImage = 'images/Dice-2.png';
+		} else if (dieValue == 3) {
+			faceImage = 'images/Dice-3.png';
+		} else if (dieValue == 4) {
+			faceImage = 'images/Dice-4.png';
+		} else if (dieValue == 5) {
+			faceImage = 'images/Dice-5.png';
+		} else if (dieValue == 6) {
+			faceImage = 'images/Dice-6.png';
+		};
+
+
+		$(die).append(`<img src='${faceImage}'>`);
+
 		$('.roll').append(die);
 	};
 };
