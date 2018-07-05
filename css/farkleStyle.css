@@ -21,3 +21,6 @@ img {
 .messages {
 	color: red;
 }
+.handDie {
+	opacity: 0.5;
+}
