@@ -276,7 +276,7 @@ const scoreHand = () => {
 			break;
 	};
 	console.log(handScore + " is the handScore at the end of scoreHand");
-	$('.pointsInHand').text(`Points from Selected Dice: ${handScore}`);
+	$('.pointsInHand').text(`${handScore}`);
 };
 
 const rollAgain = () => {
@@ -400,8 +400,8 @@ const switchActivePlayer = () => {
 };
 
 const displayScores = () => {
-	$('.tempScore').text(`Points this turn (aka tempScore): ${tempScore}`);
-	$('.pointsInHand').text(`Points from Selected Dice (aka handScore): ${handScore}`);
+	$('.tempScore').text(`${tempScore}`);
+	$('.pointsInHand').text(`${handScore}`);
 };
 
 const clearRoll = () => {
