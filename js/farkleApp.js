@@ -257,36 +257,57 @@ const scoreHand = () => {
 };
 
 const rollAgain = () => {
-	$('.rollAgain').on('click', (e) => {
-		checkForFarkle();
-		tempScore += handScore;
-		handScore = 0;
-		displayScores();
-		numOfDice = roll.length;
-		clearRoll();
-		rollDice(numOfDice);
-		displayRoll();
-		addOrRemoveDieFromHand();
+	$('.rollAgain').off().on('click', (e) => {
+		if (!checkForFarkle()) {
+			console.log("FARKLE on roll again is not true");
+			tempScore += handScore;
+			console.log(handScore + " is the handScore at rollAgain before reset");
+			handScore = 0;
+			console.log(handScore + " is the handScore at rollAgain after reset");
+			displayScores();
+			numOfDice = roll.length;
+			clearRoll();
+			rollDice(numOfDice);
+			displayRoll();
+			addOrRemoveDieFromHand();
+		} else if (checkForFarkle()) {
+			console.log("FARKLE ON ROLL AGAIN");
+				switchActivePlayer();
+				displayScores();
+				clearRoll();
+				$('.startTurn').show();
+				$('.rollAgain').hide();
+				$('.bankPoints').hide();
+				game.playTurn();
+		};
 	});
 };
 
 const bankPoints = () => {
 	$('.bankPoints').one('click', (e) => {
-		console.log("BANK POINTS CLICKED!!!");
-		checkForFarkle();
-		tempScore += handScore;
-		game.activePlayer.totalScore += tempScore;
-		tempScore = 0;
-		handScore = 0;
-		displayScores();
-		checkForWinner();
-		switchActivePlayer();
-		clearRoll();
-		$('.startTurn').show();
-		$('.rollAgain').hide();
-		$('.bankPoints').hide();
-		game.playTurn();
-		// $(this).off('click');
+		if (!checkForFarkle()) {
+			console.log("check for farkle on bankpoints is not true");
+			tempScore += handScore;
+			game.activePlayer.totalScore += tempScore;
+			handScore = 0;
+			displayScores();
+			checkForWinner();
+			switchActivePlayer();
+			clearRoll();
+			$('.startTurn').show();
+			$('.rollAgain').hide();
+			$('.bankPoints').hide();
+			game.playTurn();
+		} else if (checkForFarkle()) {
+			console.log("check for farkle on bankpoints IS true");
+			switchActivePlayer();
+			displayScores();
+			clearRoll();
+			$('.startTurn').show();
+			$('.rollAgain').hide();
+			$('.bankPoints').hide();
+			game.playTurn();
+		};
 	});
 };
 
@@ -304,6 +325,7 @@ const switchActivePlayer = () => {
 		$('.playerTwoName').addClass('highlight');
 		alert ("It is Player Two's turn");
 		rollCounter = 0;
+		tempScore = 0;
 		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player2");
 	} else if (game.activePlayer == playerTwo) {
 		$('.playerTwoScore').text(`${playerTwo.totalScore}`);
@@ -312,6 +334,7 @@ const switchActivePlayer = () => {
 		$('.playerOneName').addClass('highlight');
 		alert ("It is Player One's turn");
 		rollCounter = 0;
+		tempScore = 0;
 		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player1");
 	};
 };
@@ -319,8 +342,10 @@ const switchActivePlayer = () => {
 const checkForFarkle = () => {
 	if (rollCounter != 0 && handScore == 0) {
 		alert("FARKLE!!!")
-		switchActivePlayer();
-		clearRoll();
+		console.log("SAD FACE FARKLE");
+		return true;
+	} else {
+		return false;
 	};
 };
 
