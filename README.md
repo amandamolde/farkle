@@ -29,14 +29,4 @@ Some unsolved problems I have:
 1. If you click on a die to select it, then click it again to de-select it, you can no longer select it.
 2. In the real Farkle game, if you are able to score with all 6 dice, you can re-roll all 6 dice - also known as "hot-hands".
 
-Wireframe
-
-Player 1					Farkle          Player 2
-   Pts						 Logo              Pts
-
-   							Rolled Dice
-   					Dice Selected for Hand
-
-   								Messages
-
-Roll Again Button   Scores			Bank Points Button
+Wireframe - To come later when I figure out how to upload a scanned image to a markdown file
