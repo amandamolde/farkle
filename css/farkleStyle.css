@@ -1,8 +1,12 @@
 body {
-	background-color: #131315;
+	background-image: url("../images/feltbackground.jpg");
 	color: white;
 	margin: 0 auto;
 	text-align: center;
+}
+.header {
+	width: 162px;
+	height: 230px;
 }
 .die {
 	display: inline-block;
@@ -20,7 +24,11 @@ img {
 }
 .messages {
 	color: red;
+	/*border: 1px solid black;*/
 }
 .handDie {
 	opacity: 0.5;
+}
+.mt-10 {
+	margin-top: 10px;
 }

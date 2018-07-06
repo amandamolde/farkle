@@ -16,42 +16,35 @@
 <body>
 	<div class="container">
 
-		<div class="row">
+		<div class="row mt-10">
 			<div class="col-xs-4">
-				<img class="diceBackground" src="images/dice_background.jpg">
-			</div>
-			<div class="col-xs-4">
-				<h1>Farkle</h1>
-			</div>
-			<div class="col-xs-4">
-				<img class="diceBackground" src="images/dice_background.jpg">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-xs-3">
 				<h3 class="playerOneName highlight">Player 1</h3>
-			</div>
-			<div class="col-xs-3">
 				<h3 class="playerOneScore">0</h3>
 			</div>
-			<div class="col-xs-3">
-				<h3 class="playerTwoName">Player 2</h3>
+			<div class="col-xs-4">
+				<img class="header" src="images/header_white_font.png">
 			</div>
-			<div class="col-xs-3">
+			<div class="col-xs-4">
+				<h3 class="playerTwoName">Player 2</h3>
 				<h3 class="playerTwoScore">0</h3>
 			</div>
 		</div>
 
-		<div class="row">
-			</div>
+		<div class="row mt-10">
 			<div class="col-xs-12">
 				<div class="roll">
 				</div>
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row mt-10">
+			<div class="col-xs-12">
+				<div class="currentPlayerHand">
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-10">
 			<div class="col-xs-12">
 				<div class="messages">
 					<p>Click Start Turn to Begin</p>
@@ -59,7 +52,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+<!-- 		<div class="row">
 			<div class="col-xs-3">
 				<h3>Hand:</h3>
 			</div>
@@ -67,22 +60,49 @@
 				<h3 class="pointsInHand">0</h3>
 			</div>
 			<div class="col-xs-3">
-				<h3>Turn:</h3>
+				<h4>Turn:</h4>
 			</div>
 			<div class="col-xs-3">
 				<h3 class="tempScore">0</h3>
 			</div>
+		</div> -->
+
+		<div class="row mt-10">
+			<div class="col-xs-12">
+				<button class="btn btn-danger startTurn">Start Turn</button>
+			</div>
 		</div>
 
-		<div class="row">
+		<div class="row mt-10">
 			<div class="col-xs-12">
-				<button class="btn btn-primary startTurn">Start Turn</button>
+				<button class="btn btn-danger playAgain">Play Again?</button>
 			</div>
-			<div class="col-xs-6">
-				<button class="btn btn-primary rollAgain">Roll Again</button>
+		</div>
+
+		<div class="row mt-10">
+			<div class="col-xs-4">
+				<button class="btn btn-danger rollAgain">Roll Again</button>
 			</div>
-			<div class="col-xs-6">
-				<button class="btn btn-primary bankPoints">Bank Points</button>
+			<div class="col-xs-4 liveScores">
+				<div class="row">
+					<div class="col-xs-6">
+						<h5>Hand:</h5>
+					</div>
+					<div class="col-xs-6">
+						<h5 class="pointsInHand">0</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<h5>Turn:</h5>
+					</div>
+					<div class="col-xs-6">
+						<h5 class="tempScore">0</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<button class="btn btn-danger bankPoints">Bank Points</button>
 			</div>
 		</div>
 

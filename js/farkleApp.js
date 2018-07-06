@@ -12,6 +12,8 @@ let rollCounter = 0;
 let finalTurn = false;
 $('.rollAgain').hide();
 $('.bankPoints').hide();
+$('.playAgain').hide();
+$('.liveScores').hide();
 
 
 
@@ -82,15 +84,17 @@ const addOrRemoveDieFromHand = () => {
 		let rollIndex = $(e.currentTarget).index('.rollDie');
 		let dieRemovedFromRoll = roll.splice(rollIndex, 1)[0];
 		$(e.currentTarget).removeClass('rollDie').addClass('handDie');
-		// $(e.currentTarget).detach().appendTo('.currentPlayerHand');
+		$(e.currentTarget).detach().appendTo('.currentPlayerHand');
 		currentPlayerHand.push(dieRemovedFromRoll);
 		scoreHand();
 		
 		$('.handDie').off('click').on('click', (e) => {
 			let handIndex = $(e.currentTarget).index('.handDie');
+			console.log(e.currentTarget);
+			console.log(handIndex);
 			let dieRemovedFromHand = currentPlayerHand.splice(handIndex, 1)[0];
 			$(e.currentTarget).removeClass('handDie').addClass('rollDie');
-			// $(e.currentTarget).detach().appendTo('.roll');
+			$(e.currentTarget).detach().appendTo('.roll');
 			roll.push(dieRemovedFromHand);
 			scoreHand();
 		});
@@ -291,6 +295,7 @@ const rollAgain = () => {
 				$('.startTurn').show();
 				$('.rollAgain').hide();
 				$('.bankPoints').hide();
+				$('.liveScores').hide();
 				game.playTurn();
 			} else {
 				console.log("FARKLE on roll again is not true");
@@ -339,6 +344,7 @@ const bankPoints = () => {
 				$('.startTurn').show();
 				$('.rollAgain').hide();
 				$('.bankPoints').hide();
+				$('.liveScores').hide();
 				game.playTurn();
 			} else {
 				console.log("check for farkle on bankpoints is not true");
@@ -354,6 +360,7 @@ const bankPoints = () => {
 					$('.startTurn').show();
 					$('.rollAgain').hide();
 					$('.bankPoints').hide();
+					$('.liveScores').hide();
 					game.playTurn();
 				} else {
 					switchActivePlayer();
@@ -362,6 +369,7 @@ const bankPoints = () => {
 					$('.startTurn').show();
 					$('.rollAgain').hide();
 					$('.bankPoints').hide();
+					$('.liveScores').hide();
 					game.playTurn();
 				};
 			};
@@ -371,6 +379,13 @@ const bankPoints = () => {
 				$('.messages').append("<p>FARKLE</p>");
 				showWinner();
 			} else {
+				tempScore += handScore;
+				game.activePlayer.totalScore += tempScore;
+				if (game.activePlayer == playerOne) {
+					$('.playerOneScore').text(`${playerOne.totalScore}`);
+				} else if (game.activePlayer == playerTwo) {
+					$('.playerTwoScore').text(`${playerTwo.totalScore}`);
+				};
 				showWinner();
 			};
 		};
@@ -419,6 +434,7 @@ const startTurn = () =>{
 		$('.startTurn').hide();
 		$('.rollAgain').show();
 		$('.bankPoints').show();
+		$('.liveScores').show();
 		rollDice(6);
 		displayRoll();
 		addOrRemoveDieFromHand();
@@ -428,10 +444,22 @@ const startTurn = () =>{
 const showWinner = () => {
 	if (playerOne.totalScore > playerTwo.totalScore) {
 		$('.messages').append('<p>PLAYER ONE IS THE WINNER!!!</p>');
+		$('.rollAgain').hide();
+		$('.bankPoints').hide();
+		$('.liveScores').hide();
+		$('.playAgain').show();
 	} else {
 		$('.messages').append('<p>PLAYER TWO IS THE WINNER!!!</p>');
+		$('.rollAgain').hide();
+		$('.bankPoints').hide();
+		$('.liveScores').hide();
+		$('.playAgain').show();
 	}
 };
+
+$('.playAgain').on('click', (e) => {
+	location.reload();
+});
 
 game.playTurn();
 
