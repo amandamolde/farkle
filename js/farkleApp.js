@@ -15,8 +15,6 @@ $('.bankPoints').hide();
 $('.playAgain').hide();
 $('.liveScores').hide();
 
-
-
 class Player {
 	constructor (name) {
 		this.name = name;
@@ -26,8 +24,6 @@ class Player {
 
 const playerOne = new Player();
 const playerTwo = new Player();
-
-playerTwo.totalScore = 9900;
 
 const game = {
 	activePlayer: playerOne,
@@ -44,11 +40,9 @@ const rollDice = (numOfDice) => {
 		roll.push(randomNumber);
 	};
 	rollCounter ++;
-	console.log(rollCounter + " is the rollCounter after rollDice");
 };
 
 const displayRoll = () => {
-	console.log('display roll')
 	$('.roll').empty();
 	for (let i = 0; i < roll.length; i++) {
 		let dieValue = roll[i];
@@ -79,7 +73,6 @@ const displayRoll = () => {
 };
 
 const addOrRemoveDieFromHand = () => {
-	console.log("adding or removing die from hand");
 	$('.rollDie').on('click', (e) => {
 		let rollIndex = $(e.currentTarget).index('.rollDie');
 		let dieRemovedFromRoll = roll.splice(rollIndex, 1)[0];
@@ -90,8 +83,6 @@ const addOrRemoveDieFromHand = () => {
 		
 		$('.handDie').off('click').on('click', (e) => {
 			let handIndex = $(e.currentTarget).index('.handDie');
-			console.log(e.currentTarget);
-			console.log(handIndex);
 			let dieRemovedFromHand = currentPlayerHand.splice(handIndex, 1)[0];
 			$(e.currentTarget).removeClass('handDie').addClass('rollDie');
 			$(e.currentTarget).detach().appendTo('.roll');
@@ -100,7 +91,6 @@ const addOrRemoveDieFromHand = () => {
 		});
 	});
 };
-
 
 const countDieInHand = () => {
 	countOfOnes = 0;
@@ -125,7 +115,6 @@ const countDieInHand = () => {
 		}
 	};
 };
-
 
 const scoreOnes = () => {
 	if (countOfOnes == 1) {
@@ -230,11 +219,8 @@ const scoreTwoTriplets = () => {
 };
 
 const scoreHand = () => {
-	console.log(handScore + " is the handScore at the beg of scoreHand");
-	console.log(currentPlayerHand + " is the currentPlayerHand at scoreHand");
 	countDieInHand();
 	handScore = 0;
-	console.log(handScore + " is the handScore after being reset in scoreHand");
 	let length = currentPlayerHand.length;
 	switch (length) {
 		case 1:
@@ -279,7 +265,6 @@ const scoreHand = () => {
 			scoreTwoTriplets();
 			break;
 	};
-	console.log(handScore + " is the handScore at the end of scoreHand");
 	$('.pointsInHand').text(`${handScore}`);
 };
 
@@ -287,7 +272,6 @@ const rollAgain = () => {
 	$('.rollAgain').off().on('click', (e) => {
 		if (!finalTurn) {
 			if (rollCounter != 0 && handScore == 0) {
-				console.log("FARKLE on ROLL AGAIN");
 				$('.messages').append("<p>FARKLE</p>");
 				switchActivePlayer();
 				displayScores();
@@ -298,11 +282,8 @@ const rollAgain = () => {
 				$('.liveScores').hide();
 				game.playTurn();
 			} else {
-				console.log("FARKLE on roll again is not true");
 				tempScore += handScore;
-				console.log(handScore + " is the handScore at rollAgain before reset");
 				handScore = 0;
-				console.log(handScore + " is the handScore at rollAgain after reset");
 				displayScores();
 				numOfDice = roll.length;
 				clearRoll();
@@ -312,15 +293,11 @@ const rollAgain = () => {
 			};
 		} else {
 			if(rollCounter != 0 && handScore ==0) {
-				console.log("FARKLE ON ROLL AGAIN LAST TURN");
 				$('.messages').append("<p>FARKLE</p>");
 				showWinner();
 			} else {
-				console.log("FARKLE on roll again is not true");
 				tempScore += handScore;
-				console.log(handScore + " is the handScore at rollAgain before reset");
 				handScore = 0;
-				console.log(handScore + " is the handScore at rollAgain after reset");
 				displayScores();
 				numOfDice = roll.length;
 				clearRoll();
@@ -336,7 +313,6 @@ const bankPoints = () => {
 	$('.bankPoints').off().on('click', (e) => {
 		if (!finalTurn) {
 			if (rollCounter != 0 && handScore == 0) {
-				console.log("FARKLE ON BANK POINTS");
 				$('.messages').append("<p>FARKLE</p>");
 				switchActivePlayer();
 				displayScores();
@@ -347,7 +323,6 @@ const bankPoints = () => {
 				$('.liveScores').hide();
 				game.playTurn();
 			} else {
-				console.log("check for farkle on bankpoints is not true");
 				tempScore += handScore;
 				game.activePlayer.totalScore += tempScore;
 				handScore = 0;
@@ -375,7 +350,6 @@ const bankPoints = () => {
 			};
 		} else {
 			if (rollCounter != 0 && handScore == 0) {
-				console.log("FARKLE ON BANKPOINTS LAST TURN");
 				$('.messages').append("<p>FARKLE</p>");
 				showWinner();
 			} else {
@@ -401,7 +375,6 @@ const switchActivePlayer = () => {
 		$('.messages').append("<p>It is Player Two's turn</p>");
 		rollCounter = 0;
 		tempScore = 0;
-		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player2");
 	} else if (game.activePlayer == playerTwo) {
 		$('.playerTwoScore').text(`${playerTwo.totalScore}`);
 		$('.playerTwoName').removeClass('highlight');
@@ -410,7 +383,6 @@ const switchActivePlayer = () => {
 		$('.messages').append("<p>It is Player One's turn</p>");
 		rollCounter = 0;
 		tempScore = 0;
-		console.log(rollCounter + " is the rollCounter at switchActivePlayer to player1");
 	};
 };
 
@@ -429,8 +401,6 @@ const clearRoll = () => {
 const startTurn = () =>{
 	$('.startTurn').off().on('click', (e) => {
 		$('.messages').empty();
-		console.log("BUTTON CLICKED!!!!");
-		console.log(rollCounter + " is the initial rollCounter");
 		$('.startTurn').hide();
 		$('.rollAgain').show();
 		$('.bankPoints').show();
