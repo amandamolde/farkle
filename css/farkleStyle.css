@@ -3,6 +3,7 @@ body {
 	color: white;
 	margin: 0 auto;
 	text-align: center;
+	font-family: "Optima", "sans-serif";
 }
 .header {
 	width: 162px;
@@ -14,6 +15,7 @@ body {
 .highlight {
 	background-color: yellow;
 	color: black;
+	border-radius: 5px;
 }
 img {
 	height: 75px;
